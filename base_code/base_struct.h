@@ -40,7 +40,7 @@ const char *const illness_values[3];
 
 bool_t get_illness_t(char *illness_value);
 
-typedef struct
+typedef struct s_item
 {
 	unsigned int id;
 	city_t city;
@@ -49,5 +49,16 @@ typedef struct
 	int income;
 	bool_t illness;
 } item_t;
+
+typedef struct s_node
+{
+    /* data */
+    struct s_item item;
+    struct s_node *next;
+} t_node;
+
+t_node *initializeNode(t_node *node);
+
+t_node *addNode(t_node *node, item_t name);
 
 #endif

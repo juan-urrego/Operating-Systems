@@ -86,3 +86,26 @@ bool_t get_illness_t(char *illness_value)
 		return true;
 	return fuzzy;
 }
+
+t_node *initializeNode(t_node *node) {
+    node = NULL;
+    return node;
+}
+
+t_node *addNode(t_node *node, item_t item) {
+    t_node *newNode;
+    t_node *aux;
+    newNode = malloc(sizeof(t_node));
+    newNode->item = item;
+    newNode->next = NULL;
+    if (node == NULL) {
+        node = newNode;
+    } else {
+        aux = node;
+        while(aux->next != NULL){
+            aux = aux->next;
+        }
+        aux->next = newNode;
+    }
+    return node;
+}

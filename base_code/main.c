@@ -3,6 +3,7 @@
 #include <string.h>
 #include "base_struct.h"
 #include "base_struct.c"
+#include "list_functions.c"
 
 
 //int x = 10 -> valores normales
@@ -25,7 +26,7 @@ int main(int argc, char *argv[])
 
 	item_t element;
 	int line_number = 0;
-
+	t_node *node = initializeNode(node);
 	item_t items[SIZE];
 	while ((read = getline(&line, &len, fp)) != -1)
 	{
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
 			char *token;
 			char *s = NULL;
 			int i = 0;
+			
 			while ((token = strtok_r(line, ",", &line)))
 			{
 				city_t result_city;
@@ -78,6 +80,7 @@ int main(int argc, char *argv[])
 				}
 				i++;
 			}
+			node = addNode(node, element);
 			items[line_number - 1] = element;
 
 		}
@@ -85,16 +88,24 @@ int main(int argc, char *argv[])
 		line = NULL;
 		line_number++;
 	}
-	printf("%d\n", items[1000].id);
-	char *result_gender1;
-	items[1000].gender = atoi(result_gender1);
-	gender_t result_gender2;
-	result_gender2 = get_gender_t(result_gender1);
-	printf("este es el genero %d\n", result_gender2);
+	// LISTAS LIGADAS
+	// ----EJERCICIO 1----
+	//int numero = 0;
+	//count_people_by_city(node, &numero);
 
-	printf("por favor seleccione como ajar:");
-	printf("1. Arrays \n");
-	printf("2. Listas Ligadas \n");
+	// ----EJERCICIO 2----
+	// char *city_char = "Dallas";
+	// city_t city = get_city_t(city_char);
+	// get_average_income_by_city_and_age(node, city, 32,60);
+
+	// ---EJERCICIO 3-----
+	//get_probability_illness_by_age(node, 32);
+
+	// ---EJERCICIO 4-----
+	//t_node *nodeEncontrado = get_node_by_id(node, 12);
+	//printf("nodo encontrado con id %d y con edad %d\n", nodeEncontrado->item.id, nodeEncontrado->item.age);
+
+
 	
 
 	fclose(fp);
@@ -102,3 +113,5 @@ int main(int argc, char *argv[])
 		free(line);
 	exit(EXIT_SUCCESS);
 }
+
+
