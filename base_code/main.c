@@ -3,14 +3,9 @@
 #include <string.h>
 #include "base_struct.h"
 #include "base_struct.c"
-#include "list_functions.c"
+#include "array_functions.c"
+#include "menu.c"
 
-
-//int x = 10 -> valores normales
-//&x -> puntero de la variable
-//int *dirX = &x -> para guardar solo direcciones
-// *dirX -> para acceder al valor de ese puntero
- 
 const int SIZE = 150000;
 
 int main(int argc, char *argv[])
@@ -28,6 +23,7 @@ int main(int argc, char *argv[])
 	int line_number = 0;
 	t_node *node = initializeNode(node);
 	item_t items[SIZE];
+
 	while ((read = getline(&line, &len, fp)) != -1)
 	{
 		if (line_number > 0)
@@ -35,7 +31,6 @@ int main(int argc, char *argv[])
 			char *token;
 			char *s = NULL;
 			int i = 0;
-			
 			while ((token = strtok_r(line, ",", &line)))
 			{
 				city_t result_city;
@@ -43,8 +38,7 @@ int main(int argc, char *argv[])
 				bool_t result_illness;
 				switch (i)
 				{
-				case 0:		
-
+				case 0:
 					element.id = atoi(token);
 					break;
 				case 1:
@@ -74,7 +68,7 @@ int main(int argc, char *argv[])
 					*s = '\0';
 					result_illness = get_illness_t(token);
 					if (result_illness == fuzzy)
-						printf("Value not defined \n");
+						printf("Value not defined\n");
 					element.illness = result_illness;
 					break;
 				}
@@ -82,12 +76,12 @@ int main(int argc, char *argv[])
 			}
 			node = addNode(node, element);
 			items[line_number - 1] = element;
-
 		}
-		
 		line = NULL;
 		line_number++;
 	}
+
+
 	// LISTAS LIGADAS
 	// ----EJERCICIO 1----
 	//int numero = 0;
@@ -102,16 +96,12 @@ int main(int argc, char *argv[])
 	//get_probability_illness_by_age(node, 32);
 
 	// ---EJERCICIO 4-----
-	//t_node *nodeEncontrado = get_node_by_id(node, 12);
-	//printf("nodo encontrado con id %d y con edad %d\n", nodeEncontrado->item.id, nodeEncontrado->item.age);
+	//get_node_by_id(node, 12);
 
-
-	
+	menu(items);
 
 	fclose(fp);
 	if (line)
 		free(line);
 	exit(EXIT_SUCCESS);
 }
-
-

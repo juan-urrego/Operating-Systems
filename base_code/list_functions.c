@@ -87,19 +87,16 @@ void get_probability_illness_by_age(t_node *head, int x_age) {
     printf("La probabilidad es: %f\n", probability);
 }
 
-t_node *get_node_by_id(t_node *head, unsigned int id) {
-    // Recorrer la lista enlazada hasta encontrar el elemento con el id buscado
+void *get_node_by_id(t_node *head, unsigned int id) {
     t_node *current = head;
     while (current != NULL) {
         if (current->item.id == id) {
-            // Se encontró el elemento con el id buscado, devolver su dirección
-            return current;
+            printf("nodo encontrado con id %d y con edad %d\n", current->item.id, current->item.age);
         }
 
-        // Avanzar al siguiente nodo
+
         current = current->next;
     }
 
-    // Si se llega aquí, no se encontró ningún elemento con el id buscado
-    return NULL;
+    printf("No fue posible encontrar nodo con esa información\n");
 }
